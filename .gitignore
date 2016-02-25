@@ -1,43 +1,120 @@
-# Windows image file caches
+#ignore thumbnails created by windows
 Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-# =========================
-
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+#Ignore files build by Visual Studio
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.booproj
+*.csproj
+*.unityproj
+*.pidb
+Library/
+Temp/
+*.sln
+*.apk
+*.orig
+*.tmp
+px.userprefs
+obj/
+Xcode
+px_PC.zip
+packages
+packages.config
+UnityVS.px.sln.DotSettings
+Assets/IGSoft_Resources/Projects/
+Assets/IGSoft_Resources/Scripts/
+Assets/IGSoft_Tools/FXMaker/ToolScript/Temp.meta
+Assets/Addon/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll
+Assets/Addon/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll.meta
+Assets/Addon/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Messaging.dll
+Assets/Addon/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Messaging.dll.meta
+Assets/Addon/UnityVS/Editor.meta
+Utils/OldHooks
+px.app/
+px_Data/Managed/Mono.Security.dll
+px_Data/
+px.bar
+Assets/AutoPilot
+Assets/downloadResources/
+builds
+Assets/BuildReport/
+~$*
+Assets/Addon/UnityVS/
+Assets/Addon/UnityVS.meta
+UnityVS.px.CSharp.csproj
+UnityVS.px.CSharp.Editor.csproj
+UnityVS.px.CSharp.Plugins.csproj
+UnityVS.px.sln
+Assets/UnityVS/
+Assets/Scripts/jcy/
+Utils/Hooks/Python/Lib/
+IOS
+Assets/Addon/Haste/Editor/InternalResources/Recommendations.asset
+Assets/Arts/Sprites/Dungeon/效果图/效果图1.png
+Assets/Arts/Sprites/Dungeon/效果图/效果图1.png.meta
+Assets/Arts/Sprites/Dungeon/效果图/效果图10.png
+Assets/Arts/Sprites/Dungeon/效果图/效果图10.png.meta
+Assets/Arts/Sprites/Dungeon/效果图/效果图11.png
+Assets/Arts/Sprites/Dungeon/效果图/效果图11.png.meta
+Assets/Arts/Sprites/Dungeon/效果图/效果图12.png
+Assets/Arts/Sprites/Dungeon/效果图/效果图12.png.meta
+Assets/Arts/Sprites/Dungeon/效果图/效果图3.png
+Assets/Arts/Sprites/Dungeon/效果图/效果图3.png.meta
+Assets/Arts/Sprites/Dungeon/效果图/效果图4.png
+Assets/Arts/Sprites/Dungeon/效果图/效果图4.png.meta
+Assets/Arts/Sprites/Dungeon/效果图/效果图5.png
+Assets/Arts/Sprites/Dungeon/效果图/效果图5.png.meta
+Assets/Arts/Sprites/Dungeon/效果图/效果图6.png
+Assets/Arts/Sprites/Dungeon/效果图/效果图6.png.meta
+Assets/Arts/Sprites/Dungeon/效果图/效果图7.png
+Assets/Arts/Sprites/Dungeon/效果图/效果图7.png.meta
+Assets/Arts/Sprites/Dungeon/效果图/效果图8.png
+Assets/Arts/Sprites/Dungeon/效果图/效果图8.png.meta
+Assets/Arts/Sprites/Dungeon/效果图/效果图9.png
+Assets/Arts/Sprites/Dungeon/效果图/效果图9.png.meta
+Assets/Arts/Sprites/Story/效果图/效果图1.png
+Assets/Arts/Sprites/Story/效果图/效果图1.png.meta
+Assets/Arts/Sprites/Story/效果图/效果图2.png
+Assets/Arts/Sprites/Story/效果图/效果图2.png.meta
+Assets/Arts/Sprites/Story/效果图/效果图3.png
+Assets/Arts/Sprites/Story/效果图/效果图3.png.meta
+Assets/Arts/Sprites/Story/效果图/效果图4.png
+Assets/Arts/Sprites/Story/效果图/效果图4.png.meta
+Assets/Arts/Sprites/Story/效果图/效果图5.png
+Assets/Arts/Sprites/Story/效果图/效果图5.png.meta
+Assets/Arts/Sprites/Story/效果图/效果图6.png
+Assets/Arts/Sprites/Story/效果图/效果图6.png.meta
+Assets/Arts/Sprites/Story/效果图/效果图7.png
+Assets/Arts/Sprites/Story/效果图/效果图7.png.meta
+Assets/Arts/Sprites/Story/效果图/效果图8.png
+Assets/Arts/Sprites/Story/效果图/效果图8.png.meta
+Assets/Arts/Sprites/Story/效果图/效果图9.png
+Assets/Arts/Sprites/Story/效果图/效果图9.png.meta
+Assets/UnityVS.meta
+Assembly-CSharp-vs.csproj.DotSettings
+Assets/Arts/Sprites/Dungeon/效果图.meta
+Assets/Arts/Sprites/Story/效果图.meta
+Assets/Prefab.meta
+Assets/Addon/Haste/Editor/InternalResources/Recommendations.asset.meta
+.sonar/
+sonar-project.properties
+TestForDesigners_Data/
+px.zip
+Test
+Assets/CombatEventLog.txt
