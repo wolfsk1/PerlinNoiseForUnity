@@ -31,16 +31,6 @@ public class MapGenataor : MonoBehaviour
         OctaveText.GetComponent<InputField>().text = octave.ToString();
 	}
 
-    public void GenerateByHowToVersion()
-    {
-        Debug.Log("OnClick");
-        width = Int32.Parse(WidthText.GetComponent<InputField>().text);
-        height = Int32.Parse(HeightText.GetComponent<InputField>().text);
-        seed = Int32.Parse(SeedText.GetComponent<InputField>().text);
-        octave = Int32.Parse(OctaveText.GetComponent<InputField>().text);
-        map = GeneratePerlinNoise(width, height, seed, octave);
-        StartCoroutine(GenerateMap());
-    }
 
     IEnumerator GenerateMap()
     {
@@ -56,14 +46,14 @@ public class MapGenataor : MonoBehaviour
             for (int j = 0; j < height; j++)
             {
                 GameObject temp = (GameObject)GameObject.Instantiate(prefab, new Vector3(i, 0, j), Quaternion.identity);
-                temp.transform.localScale = new Vector3(1,(int)(map[i,j] * 10), 1);
+                temp.transform.localScale = new Vector3(1,/*(int)(map[i,j] * 10)*/map[i,j], 1);
                 //if ((int)(map[i, j] * 10) >= 3)
                 //{
                 //    temp.GetComponent<Renderer>().material.color = new Color(0,  (int)(map[i, j] * 10) / 10.0f, 0);
                 //}
                 //else
                 //{
-                    temp.GetComponent<Renderer>().material.color = new Color(0, 0, map[i, j]);
+                temp.GetComponent<Renderer>().material.color = new Color(0, 0, map[i, j]);
                 //}
                 mapGameObject.Add(temp);
             }
@@ -71,7 +61,17 @@ public class MapGenataor : MonoBehaviour
         }
     }
 
-
+    #region How To Version
+    public void GenerateByHowToVersion()
+    {
+        Debug.Log("OnClick");
+        width = Int32.Parse(WidthText.GetComponent<InputField>().text);
+        height = Int32.Parse(HeightText.GetComponent<InputField>().text);
+        seed = Int32.Parse(SeedText.GetComponent<InputField>().text);
+        octave = Int32.Parse(OctaveText.GetComponent<InputField>().text);
+        map = GeneratePerlinNoise(width, height, seed, octave);
+        StartCoroutine(GenerateMap());
+    }
 
     static float[,] GenerateWhiteNotice(int width, int height, int seed)
     {
@@ -163,6 +163,19 @@ public class MapGenataor : MonoBehaviour
         return perlinNoise;
 
     }
+    #endregion
+
+    #region Candy Version
+
+    private Vector2[] RandomVector2s;
+
+    private void GenerateRanomVector2s(int height, int width, int seed)
+    {
+        int maxCount = height > width ? height : width;
+        RandomVector2s = new Vector2[maxCount];
+    }
+
+    #endregion
 
     static float Lerp(float a, float b, float blend)
     {
