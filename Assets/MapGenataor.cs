@@ -173,9 +173,32 @@ public class MapGenataor : MonoBehaviour
     {
         int maxCount = height > width ? height : width;
         RandomVector2s = new Vector2[maxCount];
+        System.Random rand = new System.Random(seed);
+
+        for (int i = 0; i < maxCount; i++)
+        {
+            RandomVector2s[i] = Hash22(new Vector2((float)rand.NextDouble(), (float)rand.NextDouble()));
+        }
+    }
+
+    private void GeneratePerlinNoiseFBM(int height, int width, int seed, int octave)
+    {
+    }
+
+    private Vector2 Hash22(Vector2 p)
+    {
+        Vector3 p3 = new Vector3(Fract(p.x), Fract(p.y), Fract(p.x));
+        p3 += Vector3.one * Vector3.Dot(p3, (p3 + Vector3.one * 19.19f)); 
+        return new Vector2(Fract((p3.x + p3.y) * p3.z), Fract((p3.x + p3.z) * p3.y));
     }
 
     #endregion
+
+
+    static float Fract(float num)
+    {
+        return num - (int)num;
+    }
 
     static float Lerp(float a, float b, float blend)
     {
