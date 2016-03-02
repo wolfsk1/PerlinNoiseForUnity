@@ -47,14 +47,14 @@ public class MapGenataor : MonoBehaviour
             {
                 GameObject temp = (GameObject)GameObject.Instantiate(prefab, new Vector3(i, 0, j), Quaternion.identity);
                 temp.transform.localScale = new Vector3(1,/*(int)(map[i,j] * 10)*/map[i,j], 1);
-                //if ((int)(map[i, j] * 10) >= 3)
-                //{
-                //    temp.GetComponent<Renderer>().material.color = new Color(0,  (int)(map[i, j] * 10) / 10.0f, 0);
-                //}
-                //else
-                //{
+                if ((int)(map[i, j] * 10) >= 3)
+                {
+                    temp.GetComponent<Renderer>().material.color = new Color(0,  (int)(map[i, j] * 10) / 10.0f, 0);
+                }
+                else
+                {
                 temp.GetComponent<Renderer>().material.color = new Color(0, 0, map[i, j]);
-                //}
+                }
                 mapGameObject.Add(temp);
             }
             yield return null;
@@ -167,30 +167,47 @@ public class MapGenataor : MonoBehaviour
 
     #region Candy Version
 
-    private Vector2[] RandomVector2s;
     private float newSeed;
 
-    private void GenerateRanomVector2s(int height, int width, int seed)
+    public void GenerateByCandyVersion()
     {
-        int maxCount = height > width ? height : width;
-        RandomVector2s = new Vector2[maxCount];
-        System.Random rand = new System.Random(seed);
-
-        for (int i = 0; i < maxCount; i++)
-        {
-            RandomVector2s[i] = Hash22(new Vector2((float)rand.NextDouble(), (float)rand.NextDouble()));
-        }
+        Debug.Log("OnClick");
+        width = Int32.Parse(WidthText.GetComponent<InputField>().text);
+        height = Int32.Parse(HeightText.GetComponent<InputField>().text);
+        seed = Int32.Parse(SeedText.GetComponent<InputField>().text);
+        octave = Int32.Parse(OctaveText.GetComponent<InputField>().text);
+        newSeed = (float)new System.Random(seed).NextDouble();
+        map = GeneratePerlinNoiseFBM(width, height, seed, octave);
+        StartCoroutine(GenerateMap());
     }
 
-    private void GeneratePerlinNoiseFBM(int height, int width, int seed, int octave)
+
+    private float[,] GeneratePerlinNoiseFBM(int height, int width, int seed, int octave)
     {
-        newSeed = (float)new System.Random(seed).NextDouble();
+
+        float[,] result =  new float[width,height];
+
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                for (int k = 0; k < octave; k++)
+                {
+                    float frequency = 1 << k;
+                    float amplitude = 1/frequency;
+                    result[i, j] += GeneratePerlinNoise(new Vector2((i + 0.5f) * frequency, (j + 0.5f) * frequency)) * amplitude;
+                }
+
+            }
+        }
+
+        return result;
     }
 
     private float GeneratePerlinNoise(Vector2 p)
     {
         // Find p Left-Bottom Point
-        Vector2 pi = new Vector2(Fract(p.x), Fract(p.y));
+        Vector2 pi = new Vector2((int)p.x, (int)p.y);
         // Find pi to p
         Vector2 pf = p - pi;
         // Calculate ease weight
@@ -202,8 +219,10 @@ public class MapGenataor : MonoBehaviour
         Vector2 lt = pi + new Vector2(0f, 1f);
         Vector2 rt = pi + Vector2.one;
 
-        float BottomX = Lerp(Vector2.Dot(Hash22(lb), (pf - Vector2.zero)), Vector2.Dot(Hash22(rb), (pf - new Vector2(1f, 0f))), weightX) ; 
+        float bottomX = Lerp(Vector2.Dot(Hash22(lb), (pf - Vector2.zero)), Vector2.Dot(Hash22(rb), (pf - new Vector2(1f, 0f))), weightX);
+        float topX = Lerp(Vector2.Dot(Hash22(lt), (pf - new Vector2(0f, 1f))), Vector2.Dot(Hash22(rt), (pf - Vector2.one)), weightX);
 
+        return Lerp(bottomX, topX, weightY);
 
     }
 
