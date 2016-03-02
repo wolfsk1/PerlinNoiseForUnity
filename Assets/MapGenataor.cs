@@ -168,6 +168,7 @@ public class MapGenataor : MonoBehaviour
     #region Candy Version
 
     private Vector2[] RandomVector2s;
+    private float newSeed;
 
     private void GenerateRanomVector2s(int height, int width, int seed)
     {
@@ -183,12 +184,33 @@ public class MapGenataor : MonoBehaviour
 
     private void GeneratePerlinNoiseFBM(int height, int width, int seed, int octave)
     {
+        newSeed = (float)new System.Random(seed).NextDouble();
+    }
+
+    private float GeneratePerlinNoise(Vector2 p)
+    {
+        // Find p Left-Bottom Point
+        Vector2 pi = new Vector2(Fract(p.x), Fract(p.y));
+        // Find pi to p
+        Vector2 pf = p - pi;
+        // Calculate ease weight
+        float weightX = pf.x * pf.x * (3 - 2 * pf.x);
+        float weightY = pf.y * pf.y * (3 - 2 * pf.y);
+
+        Vector2 lb = pi + Vector2.zero;
+        Vector2 rb = pi + new Vector2(1f, 0f);
+        Vector2 lt = pi + new Vector2(0f, 1f);
+        Vector2 rt = pi + Vector2.one;
+
+        float BottomX = Lerp(Vector2.Dot(Hash22(lb), (pf - Vector2.zero)), Vector2.Dot(Hash22(rb), (pf - new Vector2(1f, 0f))), weightX) ; 
+
+
     }
 
     private Vector2 Hash22(Vector2 p)
     {
         Vector3 p3 = new Vector3(Fract(p.x), Fract(p.y), Fract(p.x));
-        p3 += Vector3.one * Vector3.Dot(p3, (p3 + Vector3.one * 19.19f)); 
+        p3 += Vector3.one * Vector3.Dot(p3, (p3 + Vector3.one * newSeed)); 
         return new Vector2(Fract((p3.x + p3.y) * p3.z), Fract((p3.x + p3.z) * p3.y));
     }
 
